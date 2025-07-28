@@ -26,6 +26,20 @@ class Tree {
 
     return rootNode;
   }
+
+  insert(value, node = this.root) {
+    if (node === null)
+      return new Node(value);
+
+    if (value < node.data) {
+      node.left = this.insert(value, node.left);
+    }
+    else if (value > node.data) {
+      node.right = this.insert(value, node.right);
+    }
+
+    return node;
+   }
 }
 
 export default Tree;
