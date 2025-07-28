@@ -27,3 +27,10 @@ prettyPrint(tree.root);
 console.log("-----------------------------------------")
 tree.insert(9999);
 prettyPrint(tree.root);
+
+console.log("-------------------------------------------------")
+tree.delete(67);
+prettyPrint(tree.root);
+console.log("-------------------------------------------------")
+tree.delete(8);
+prettyPrint(tree.root);
