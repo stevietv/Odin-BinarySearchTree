@@ -83,6 +83,19 @@ class Tree {
     }
     return node;
    }
+
+   find(value, node = this.root) {
+    if (node === null) {
+      return "not found";
+    }
+    if (value < node.data) {
+      return this.find(value, node.left);
+    }
+    if (value > node.data) {
+      return this.find(value, node.right);
+    }
+    else return node;
+   }
 }
 
 export default Tree;

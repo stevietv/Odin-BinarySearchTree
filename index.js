@@ -34,3 +34,5 @@ prettyPrint(tree.root);
 console.log("-------------------------------------------------")
 tree.delete(8);
 prettyPrint(tree.root);
+
+console.log(tree.find(9));
