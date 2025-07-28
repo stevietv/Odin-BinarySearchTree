@@ -1,0 +1,8 @@
+{
+  "name": "odin-binary-search-tree",
+  "version": "1.0.0",
+  "description": "Binary Search Tree implementation for The Odin Project",
+  "main": "index.js",
+  "private": true,
+  "type": "module"
+}
