@@ -52,3 +52,8 @@ console.log(tree.depth(6345));
 
 console.log("-------------------------------------------------")
 console.log(tree.height(99));
+
+console.log("-----------------------------------------")
+console.log(tree.isBalanced());
+tree.rebalance();
+console.log(tree.isBalanced());

@@ -240,11 +240,13 @@ class Tree {
     }
 
     return true;
-
-
-
   }
 
+  rebalance() {
+    let arr = [];
+    this.inorder((node) => {arr.push(node.data);});
+    this.root = this.buildTree(arr);
+  }
 }
 
 export default Tree;
