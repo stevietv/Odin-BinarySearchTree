@@ -86,7 +86,7 @@ class Tree {
 
    find(value, node = this.root) {
     if (node === null) {
-      return "not found";
+      return null;
     }
     if (value < node.data) {
       return this.find(value, node.left);
@@ -193,6 +193,24 @@ class Tree {
 
     catch (err){
       console.log(err);
+    }
+  }
+
+  depth(value, node = this.root, height = 0) {
+    if (this.find(value) === null) {
+      return null;
+    }
+
+    if (value === node.data) {
+      return height;
+    }
+
+    if (value < node.data) {
+      return this.depth(value, node.left, height + 1)
+    }
+
+    if (value > node.data) {
+      return this.depth(value, node.right, height + 1)
     }
   }
 

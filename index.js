@@ -47,3 +47,6 @@ tree.inorder((node) => { console.log(node.data) });
 
 console.log("-------------------------------------------------")
 tree.postorder((node) => { console.log(node.data) });
+
+console.log("-------------------------------------------------")
+console.log(tree.depth(6345));
