@@ -50,3 +50,6 @@ tree.postorder((node) => { console.log(node.data) });
 
 console.log("-------------------------------------------------")
 console.log(tree.depth(6345));
+
+console.log("-------------------------------------------------")
+console.log(tree.height(99));

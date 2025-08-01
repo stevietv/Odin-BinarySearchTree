@@ -21,8 +21,8 @@ class Tree {
 
     let rootNode = new Node(array[mid]);
 
-    rootNode.left = this.buildTree(array,  start,  mid-1, sorted);
-    rootNode.right = this.buildTree(array,  mid+1,  end, sorted);
+    rootNode.left = this.buildTree(array, start, mid - 1, sorted);
+    rootNode.right = this.buildTree(array, mid + 1, end, sorted);
 
     return rootNode;
   }
@@ -33,26 +33,23 @@ class Tree {
 
     if (value < node.data) {
       node.left = this.insert(value, node.left);
-    }
-    else if (value > node.data) {
+    } else if (value > node.data) {
       node.right = this.insert(value, node.right);
     }
 
     return node;
-   }
+  }
 
-   delete(value, node = this.root) {
+  delete(value, node = this.root) {
     if (node === null) {
       return node;
     }
 
     if (value < node.data) {
       node.left = this.delete(value, node.left);
-    }
-    else if (value > node.data) {
+    } else if (value > node.data) {
       node.right = this.delete(value, node.right);
-    }
-    else {
+    } else {
 
       // case 1 - leaf node
       if (node.left === null && node.right === null) {
@@ -82,9 +79,9 @@ class Tree {
       }
     }
     return node;
-   }
+  }
 
-   find(value, node = this.root) {
+  find(value, node = this.root) {
     if (node === null) {
       return null;
     }
@@ -93,66 +90,61 @@ class Tree {
     }
     if (value > node.data) {
       return this.find(value, node.right);
+    } else return node;
+  }
+
+
+  // Breadth First Search
+  levelOrderForEach(callback = null) {
+
+    try {
+      if (callback === null || callback === undefined) {
+        throw new Error("no callback function provided")
+      }
+
+      const queue = [];
+      queue.push(this.root);
+
+      while (queue.length > 0) {
+        let currentNode = queue[0];
+
+        callback(currentNode);
+
+        if (currentNode.left !== null) {
+          queue.push(currentNode.left);
+        }
+
+        if (currentNode.right !== null) {
+          queue.push(currentNode.right);
+        }
+
+        queue.shift();
+      }
+    } catch (err) {
+      console.log(err);
     }
-    else return node;
-   }
-
-
-   // Breadth First Search
-   levelOrderForEach(callback = null) {
-
-     try {
-       if (callback === null || callback === undefined) {
-         throw new Error("no callback function provided")
-       }
-
-       const queue = [];
-       queue.push(this.root);
-
-       while (queue.length > 0) {
-         let currentNode = queue[0];
-
-         callback(currentNode);
-
-         if (currentNode.left !== null) {
-           queue.push(currentNode.left);
-         }
-
-         if (currentNode.right !== null) {
-           queue.push(currentNode.right);
-         }
-
-         queue.shift();
-       }
-     }
-
-     catch (err){
-       console.log(err);
-     }
-   }
+  }
 
 
   // Depth First Search
-   preorder(callback = null, node = this.root) {
-     try {
-       if (callback === null || callback === undefined) {
-         throw new Error("no callback function provided")
-       }
+  preorder(callback = null, node = this.root) {
+    try {
+      if (callback === null || callback === undefined) {
+        throw new Error("no callback function provided")
+      }
 
-       if (node === null) {
-         return;
-       }
+      if (node === null) {
+        return;
+      }
 
-       callback(node);
+      callback(node);
 
-       this.preorder(callback, node.left);
-       this.preorder(callback, node.right);
-     }
-
-     catch (err){
-       console.log(err);
-     }
-   }
+      this.preorder(callback, node.left);
+      this.preorder(callback, node.right);
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   // Depth First Search
   inorder(callback = null, node = this.root) {
@@ -168,9 +160,7 @@ class Tree {
       this.inorder(callback, node.left);
       callback(node);
       this.inorder(callback, node.right);
-    }
-
-    catch (err){
+    } catch (err) {
       console.log(err);
     }
   }
@@ -189,9 +179,7 @@ class Tree {
       this.postorder(callback, node.left);
       this.postorder(callback, node.right);
       callback(node);
-    }
-
-    catch (err){
+    } catch (err) {
       console.log(err);
     }
   }
@@ -214,7 +202,25 @@ class Tree {
     }
   }
 
+  height(value, node = this.root, height = 0, nodeFound = false) {
 
+    if (!nodeFound) {
+      node = this.find(value);
+      nodeFound = true;
+      if (node === null) {
+        return null;
+      }
+    }
+
+    if (node === null) {
+      return -1;
+    }
+
+    let leftHeight = this.height(value, node.left, height, nodeFound);
+    let rightHeight = this.height(value, node.right, height, nodeFound);
+
+    return Math.max(leftHeight,rightHeight) + 1;
+  }
 }
 
 export default Tree;
