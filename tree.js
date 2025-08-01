@@ -96,6 +96,31 @@ class Tree {
     }
     else return node;
    }
+
+   levelOrderForEach(callback) {
+    if (callback === null || callback === undefined) {
+      return new Error("no callback function provided")
+    }
+
+    const queue = [];
+    queue.push(this.root);
+
+    while (queue.length > 0) {
+      let currentNode = queue[0];
+
+      callback(currentNode);
+
+      if (currentNode.left !== null) {
+        queue.push(currentNode.left);
+      }
+
+      if (currentNode.right !== null) {
+        queue.push(currentNode.right);
+      }
+
+      queue.shift();
+    }
+   }
 }
 
 export default Tree;
