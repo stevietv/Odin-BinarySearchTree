@@ -16,7 +16,6 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
   }
 };
 
-
 prettyPrint(tree.root);
 
 console.log("-----------------------------------------")

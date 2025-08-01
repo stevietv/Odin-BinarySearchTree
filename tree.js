@@ -221,6 +221,30 @@ class Tree {
 
     return Math.max(leftHeight,rightHeight) + 1;
   }
+
+  isBalanced(node = this.root) {
+    if (node === null) {
+      return true;
+    }
+    let leftHeight = node.left !== null ? this.height(node.left.data) : 0;
+    let rightHeight = node.right !== null ? this.height(node.right.data) : 0;
+
+    let heightDifference = Math.abs(leftHeight - rightHeight);
+
+    if (heightDifference > 1) {
+      return false;
+    }
+
+    if (!this.isBalanced(node.left) || !this.isBalanced(node.right)) {
+      return false;
+    }
+
+    return true;
+
+
+
+  }
+
 }
 
 export default Tree;
