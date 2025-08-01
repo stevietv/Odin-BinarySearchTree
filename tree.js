@@ -97,30 +97,106 @@ class Tree {
     else return node;
    }
 
-   levelOrderForEach(callback) {
-    if (callback === null || callback === undefined) {
-      return new Error("no callback function provided")
-    }
 
-    const queue = [];
-    queue.push(this.root);
+   // Breadth First Search
+   levelOrderForEach(callback = null) {
 
-    while (queue.length > 0) {
-      let currentNode = queue[0];
+     try {
+       if (callback === null || callback === undefined) {
+         throw new Error("no callback function provided")
+       }
 
-      callback(currentNode);
+       const queue = [];
+       queue.push(this.root);
 
-      if (currentNode.left !== null) {
-        queue.push(currentNode.left);
-      }
+       while (queue.length > 0) {
+         let currentNode = queue[0];
 
-      if (currentNode.right !== null) {
-        queue.push(currentNode.right);
-      }
+         callback(currentNode);
 
-      queue.shift();
-    }
+         if (currentNode.left !== null) {
+           queue.push(currentNode.left);
+         }
+
+         if (currentNode.right !== null) {
+           queue.push(currentNode.right);
+         }
+
+         queue.shift();
+       }
+     }
+
+     catch (err){
+       console.log(err);
+     }
    }
+
+
+  // Depth First Search
+   preorder(callback = null, node = this.root) {
+     try {
+       if (callback === null || callback === undefined) {
+         throw new Error("no callback function provided")
+       }
+
+       if (node === null) {
+         return;
+       }
+
+       callback(node);
+
+       this.preorder(callback, node.left);
+       this.preorder(callback, node.right);
+     }
+
+     catch (err){
+       console.log(err);
+     }
+   }
+
+  // Depth First Search
+  inorder(callback = null, node = this.root) {
+    try {
+      if (callback === null || callback === undefined) {
+        throw new Error("no callback function provided")
+      }
+
+      if (node === null) {
+        return;
+      }
+
+      this.inorder(callback, node.left);
+      callback(node);
+      this.inorder(callback, node.right);
+    }
+
+    catch (err){
+      console.log(err);
+    }
+  }
+
+  // Depth First Search
+  postorder(callback = null, node = this.root) {
+    try {
+      if (callback === null || callback === undefined) {
+        throw new Error("no callback function provided")
+      }
+
+      if (node === null) {
+        return;
+      }
+
+      this.postorder(callback, node.left);
+      this.postorder(callback, node.right);
+      callback(node);
+    }
+
+    catch (err){
+      console.log(err);
+    }
+  }
+
+
 }
 
 export default Tree;

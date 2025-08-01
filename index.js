@@ -37,4 +37,13 @@ prettyPrint(tree.root);
 
 console.log(tree.find(9));
 
-tree.levelOrderForEach((node) => { console.log(node.data) })
+tree.levelOrderForEach((node) => { console.log(node.data) });
+
+console.log("-------------------------------------------------")
+tree.preorder((node) => { console.log(node.data) });
+
+console.log("-------------------------------------------------")
+tree.inorder((node) => { console.log(node.data) });
+
+console.log("-------------------------------------------------")
+tree.postorder((node) => { console.log(node.data) });
